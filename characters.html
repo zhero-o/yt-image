@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Sheets — Five Covenants</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #F5EFE0;
+      color: #1a1506;
+      min-height: 100vh;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #16324F;
+      color: #fff;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    }
+    .header-left { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .site-header h1 { font-size: 1.15rem; font-weight: 700; color: #F5C842; letter-spacing: 0.02em; }
+    .sheet-count {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      color: #9DB8D2;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #copy-all {
+      background: #C8860A;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    #copy-all:hover { background: #a06d08; }
+    #copy-all.copied { background: #2d7a3a; }
+
+    main { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+    .intro-note {
+      font-family: sans-serif;
+      font-size: 0.78rem;
+      color: #7a6a50;
+      background: #fff;
+      border: 1px solid #ddd3bf;
+      border-left: 4px solid #C8860A;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .section-header {
+      margin: 2.25rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #16324F;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .section-header h2 {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #16324F;
+    }
+
+    .character-block {
+      background: #fff;
+      border: 1px solid #ddd3bf;
+      border-left: 4px solid #C8860A;
+      border-radius: 4px;
+      padding: 0.85rem 5.5rem 0.85rem 0.9rem;
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+
+    .character-label {
+      font-family: sans-serif;
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: #7a6a50;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.45rem;
+    }
+
+    .character-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #1f1a0f;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: #F5EFE0;
+      border: 1px solid #C8860A;
+      color: #C8860A;
+      padding: 0.28rem 0.65rem;
+      border-radius: 3px;
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover  { background: #C8860A; color: #fff; }
+    .copy-btn.copied { background: #2d7a3a; color: #fff; border-color: #2d7a3a; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-left">
+    <h1>Character Sheets — Five Covenants</h1>
+    <span class="sheet-count">8 characters</span>
+  </div>
+  <button id="copy-all">Copy All Sheets</button>
+</header>
+
+<main>
+
+  <div class="intro-note">
+    Each sheet generates a reference image used by the generation tool to lock in consistent appearance across all scenes. Three views per character — front, three-quarter, side profile. Sean's sheet is defined separately in CLAUDE.md.
+  </div>
+
+
+  <!-- ═══════════════════════════════════
+       OLD TESTAMENT CHARACTERS
+  ═══════════════════════════════════ -->
+  <div class="section-header"><h2>Old Testament</h2></div>
+
+  <div class="character-block">
+    <div class="character-label">CS1 — Noah</div>
+    <div class="character-text">Noah, three views: front, three-quarter, side profile. Elderly man, heavyset and weathered, white hair worn medium length, full long white beard. Rough undyed wool tunic belted at the waist with a simple cord, ankle-length, sandals with leather straps. No staff. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS2 — Abraham</div>
+    <div class="character-text">Abraham, three views: front, three-quarter, side profile. Very elderly man, lean and dignified with a long life's weight in his posture, white hair medium length, long full white beard. Loose long robe of natural undyed wool worn over a linen tunic, sandals, a simple travel cloak draped over one shoulder. No staff. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS3 — Sarah</div>
+    <div class="character-text">Sarah, three views: front, three-quarter, side profile. Elderly woman, slight and dignified, silver-white hair covered with a draped linen head cloth. Long loose robe of natural linen in cream and pale earth tones, sandals, simple fabric belt at the waist. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS4 — Moses</div>
+    <div class="character-text">Moses, three views: front, three-quarter, side profile. Elderly man, approximately 80 years, strong and broad-shouldered despite his age, white hair worn close, full white beard, deeply weathered skin. Plain linen tunic belted at the waist, a heavier wool outer robe in undyed cream, sandals with leather straps. No staff. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS5 — David (as shepherd)</div>
+    <div class="character-text">David as shepherd, three views: front, three-quarter, side profile. Young man, late teens, lean and strong with a shepherd's build, dark brown hair medium length and slightly wavy, short dark beard just beginning. Simple rough linen tunic belted at the waist, worn sandals, a plain wool cloak. No crown. No weapons. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS6 — David (as king)</div>
+    <div class="character-text">David as king, three views: front, three-quarter, side profile. Man in his thirties, strong build, dark brown hair medium length, beard full and trimmed. Fine linen tunic in cream or white, a deeper-toned wool outer robe with a simple woven belt, sandals. No crown. No weapons. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="character-block">
+    <div class="character-label">CS7 — Jeremiah</div>
+    <div class="character-text">Jeremiah, three views: front, three-quarter, side profile. Young to middle-aged man, slight build, dark hair medium length, short dark beard. Coarse rough-woven wool tunic in undyed gray-brown, a simple rope belt, worn sandals. Posture carries habitual weight. No staff. No accessories. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════
+       NEW TESTAMENT CHARACTERS
+  ═══════════════════════════════════ -->
+  <div class="section-header"><h2>New Testament</h2></div>
+
+  <div class="character-block">
+    <div class="character-label">CS8 — Jesus</div>
+    <div class="character-text">Jesus, three views: front, three-quarter, side profile. Man approximately thirty years of age, average build, lean and upright, dark brown hair medium length falling to the shoulders, short full dark beard. Plain first-century Jewish linen tunic, a simple wool outer cloak in undyed cream or off-white, sandals with leather straps. No accessories. No anachronistic props. soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+</main>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var text = btn.closest('.character-block').querySelector('.character-text').textContent.trim();
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      }).catch(function() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+
+  document.getElementById('copy-all').addEventListener('click', function() {
+    var all = Array.from(document.querySelectorAll('.character-text'))
+      .map(function(el) { return el.textContent.trim(); })
+      .join('\n\n');
+    var btn = document.getElementById('copy-all');
+    navigator.clipboard.writeText(all).then(function() {
+      btn.textContent = 'All Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy All Sheets';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = all;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'All Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy All Sheets';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+</script>
+
+</body>
+</html>
