@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Five Covenants — Image Prompts</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #F5EFE0;
+      color: #1a1506;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #16324F;
+      color: #fff;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    }
+    .header-left { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .site-header h1 { font-size: 1.15rem; font-weight: 700; color: #F5C842; letter-spacing: 0.02em; }
+    .prompt-count {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      color: #9DB8D2;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #copy-all {
+      background: #C8860A;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    #copy-all:hover { background: #a06d08; }
+    #copy-all.copied { background: #2d7a3a; }
+
+    /* ── MAIN ── */
+    main { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      margin: 2.25rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #16324F;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .section-header h2 {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #16324F;
+    }
+    .section-count {
+      font-family: sans-serif;
+      font-size: 0.65rem;
+      color: #8c7a5a;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PROMPT BLOCK ── */
+    .prompt-block {
+      background: #fff;
+      border: 1px solid #ddd3bf;
+      border-left: 4px solid #b8a88a;
+      border-radius: 4px;
+      padding: 0.85rem 5.5rem 0.85rem 0.9rem;
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+    /* type-specific left border colours */
+    .prompt-block.scripture  { border-left-color: #C8860A; }
+    .prompt-block.word       { border-left-color: #D4AF37; }
+    .prompt-block.two-panel  { border-left-color: #16324F; }
+    .prompt-block.four-panel { border-left-color: #0B2237; }
+    .prompt-block.concept    { border-left-color: #2A6FA8; }
+    .prompt-block.three-panel{ border-left-color: #16324F; }
+
+    .prompt-label {
+      font-family: sans-serif;
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: #7a6a50;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .type-tag {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.1rem 0.35rem;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-scripture  { background: #FEF3C7; color: #92400E; }
+    .tag-word       { background: #FEF9C3; color: #713F12; }
+    .tag-two-panel  { background: #DBEAFE; color: #1E3A5F; }
+    .tag-four-panel { background: #E0E7FF; color: #1E2A6A; }
+    .tag-concept    { background: #E0F2FE; color: #0C4A6E; }
+    .tag-three-panel{ background: #EDE9FE; color: #3B1F6A; }
+
+    .prompt-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #1f1a0f;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: #F5EFE0;
+      border: 1px solid #C8860A;
+      color: #C8860A;
+      padding: 0.28rem 0.65rem;
+      border-radius: 3px;
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover  { background: #C8860A; color: #fff; }
+    .copy-btn.copied { background: #2d7a3a; color: #fff; border-color: #2d7a3a; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-left">
+    <h1>The Five Covenants — Image Prompts</h1>
+    <span class="prompt-count">140 prompts</span>
+  </div>
+  <button id="copy-all">Copy All Prompts</button>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 1: INTRO  (P1–P10)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>Intro</h2>
+    <span class="section-count">P1–P10</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P1 — Sean with open Bible</div>
+    <div class="prompt-text">Sean with an open Bible resting in his hands, standing near a window, soft natural light falling from the left across the open pages, warm parchment and amber tones surrounding him, a cool gray shadow behind, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P2 — The Bible as scattered stories</div>
+    <div class="prompt-text">An open Bible lying flat, scattered vignettes floating unconnected above it — a small ark on dark water, stone tablets, a crown, a cross — each isolated in deep navy, a single amber light falling on the Bible itself below, the vignettes drifting in shadow, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P3 — Disconnected stories vs. one unified story <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: scattered biblical vignettes floating unconnected above an open Bible — an ark, stone tablets, a crown, a cross — each isolated in deep navy wash, navy banner labeled Many Stories. Right panel: the same vignettes now connected by a single amber thread running through all of them in sequence, warm gold wash throughout, amber banner labeled One Story, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P4 — The thread runs from Genesis to Revelation <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a single horizontal line spanning left to right labeled Genesis at the left end and Revelation at the right, a continuous gold thread running the full length of the line above it, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P5 — A covenant: a binding promise <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, three objects spaced evenly: a clasped pair of hands on the left labeled Binding Promise, two figures facing each other in the center labeled Two Parties, a sealed scroll on the right labeled Sacred Agreement — each resting on an amber brushstroke banner below, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P6 — Ancient covenants not signed on paper</div>
+    <div class="prompt-text">Two ancient figures standing across from each other on a bare earth floor, a parchment scroll between them on the ground, both figures' postures formal and weighty, amber torchlight from one side, deep navy shadow on the other, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P7 — Cut in blood, sealed with signs</div>
+    <div class="prompt-text">A sealed parchment document resting on stone ground, a clay seal pressed at the corner, amber light from a nearby torch falling on the seal and the parchment, deep navy surrounding everything beyond the light, the gravity of the agreement in the stillness of the scene, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P8 — Break it, pay with your life <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: two ancient figures standing between the halved pieces of animals on the ground, the covenant being made, amber warmth at the center of the path between them, navy banner labeled The Covenant Made. Right panel: one figure standing alone — the other absent — the halved pieces still on the ground, cold blue-gray light, the emptiness of the broken agreement, navy banner labeled The Price of Breaking It, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P9 — Five covenants: the skeleton of the Bible <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a single horizontal line with five labeled markers: first labeled Noah with a rainbow arc above, second labeled Abraham with a small flame, third labeled Moses with stone tablets, fourth labeled David with a crown, fifth labeled New Covenant with a cross — navy labels and amber symbols, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P10 — All five point toward one person <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, staircase, five rising steps labeled Noah, Abraham, Moses, David, and New Covenant ascending left to right, a single amber light at the top right toward which all steps ascend, navy steps with amber labels, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 2: PRE-NOAH CONTEXT  (P11–P16)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>Pre-Noah Context</h2>
+    <span class="section-count">P11–P16</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P11 — Adam and Eve expelled from Eden</div>
+    <div class="prompt-text">Adam and Eve walking away from a distant garden gate, their postures bent under weight, the garden behind them in fading amber and gold, the world ahead in deep navy and cool gray, a great distance already opening between them and the gate they are leaving, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P12 — Genesis 4 begins with a murder</div>
+    <div class="prompt-text">Cain standing alone in an open field, head bowed and posture collapsing inward, deep navy wash over the entire landscape, a single pale amber light from above landing on the ground beside him — not on him — the weight of what has happened visible in his posture and bent shoulders, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P13 — "And he died" — eight times in one chapter <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, eight small identical grave markers in a row, each labeled in navy with a name — Adam, Seth, Enosh, Kenan, Mahalalel, Jared, Methuselah, Lamech — the repetition of death as the visual fact, deep navy ground wash beneath the row, white background above, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P14 — Evil spread completely across the earth</div>
+    <div class="prompt-text">A vast dark landscape from horizon to horizon, scattered figures across the plain in deep navy, no amber warmth anywhere — only a cold steel-blue light at the center that illuminates without warming — the atmosphere of a world entirely turned from God, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P15 — God decided to start over</div>
+    <div class="prompt-text">An expanse of dark churning water beneath a heavy sky, the world submerged and still, deep navy and steel blue throughout, a single shaft of pale light descending from above through the clouds — the only warmth, coming from outside the world — the decision already made, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P16 — God finds Noah</div>
+    <div class="prompt-text">Noah standing alone in a darkened landscape, posture upright and still amid the corruption around him, a single shaft of amber light descending from above and landing on Noah only, deep navy wash over everything and everyone else, his face turned upward toward the light, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 3: THE NOAHIC COVENANT  (P17–P30)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>The Noahic Covenant</h2>
+    <span class="section-count">P17–P30</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P17 — Noah steps off the ark</div>
+    <div class="prompt-text">Noah stepping from the ark ramp onto new earth, head slightly lifted, posture open, the great ark receding into soft mist behind him, a vast open landscape in warm parchment and cream ahead, amber light from behind casting his shadow forward onto the fresh ground, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P18 — God makes a promise to all living creatures</div>
+    <div class="prompt-text">Noah surrounded by animals of every kind on the new earth, figures small against an open sky, a great rainbow arc forming above the whole scene, amber and gold light radiating from the arc downward over the entire landscape and all the creatures below, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P19 — Genesis 9:8–11 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Noah's painterly portrait bust beside the scroll, centered verse text: Then God said to Noah and to his sons with him: I now establish my covenant with you and with your descendants after you and with every living creature that was with you — the birds, the livestock and all the wild animals, all those that came out of the ark with you — every living creature on earth. I establish my covenant with you: Never again will all life be destroyed by the waters of a flood; never again will there be a flood to destroy the earth. Genesis 9:8–11, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P20 — Universal scope: made with every living creature <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, ring diagram, innermost ring labeled Noah in amber, middle ring labeled All People in navy, outermost ring labeled All Living Creatures in navy, a small rainbow arc above the diagram, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P21 — You are included in this covenant right now</div>
+    <div class="prompt-text">Sean standing outdoors with open sky behind him, posture open toward the viewer, a rainbow arc faintly visible in the sky behind him in amber and gold, soft natural light on Sean, cool sky and clouds behind, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P22 — Unconditional: rests entirely on God's faithfulness <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, a single node labeled God's Promise in amber, one arrow pointing downward labeled Rests on His Faithfulness Alone — no second path, no conditional branch, no human figure attached — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P23 — Genesis 9:13 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Noah's painterly portrait bust beside the scroll, centered verse text: I have set my rainbow in the clouds, and it will be the sign of the covenant between me and the earth. Genesis 9:13, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block word">
+    <div class="prompt-label">P24 — Hebrew word: qeshet <span class="type-tag tag-word">word card</span></div>
+    <div class="prompt-text">Hebrew word card, קֶשֶׁת large at top in navy, qeshet in amber below, "war bow; weapon of war" centered in quotes, a war bow mounted on a stone wall with a rainbow arc visible through an open window behind it at the bottom of the card, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P25 — God hanging up his war bow — the war is over</div>
+    <div class="prompt-text">A great war bow suspended high in a parting of heavy clouds, its arc curving into the shape of a rainbow, amber and gold light radiating outward from the bow's curve across the sky, deep navy clouds pulling back on both sides, the earth small and distant below, no figures — only sky and the hung bow, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P26 — A warrior who has hung his bow on the wall</div>
+    <div class="prompt-text">A warrior figure seen from behind, standing before a stone wall on which a great bow is mounted high above him, posture completely at rest — the war done — the weapon behind him and above, amber light falling from the mounted bow down onto the warrior below, deep navy surrounding the rest of the room, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P27 — The arrow that was not fired <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a war bow drawn taut, an arrow aimed downward toward a dark earth below, the tension of judgment in the image, deep navy wash, navy banner labeled It Could Have Gone Here. Right panel: the same bow now hung unmounted on a stone wall, the arrow resting beside it, warm amber light on both, the stillness of restraint, amber banner labeled He Hung It Up, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P28 — The Noahic Covenant keeps the earth standing</div>
+    <div class="prompt-text">A vast landscape from a slightly elevated view — fields and seasons visible, amber light touching the ground evenly, a rainbow arc faint in the sky above, the world held in its rhythms, a single pocket of cool shadow at the horizon's edge, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P29 — Seasons still change, crops still grow — time to turn to God</div>
+    <div class="prompt-text">A harvest field in amber and gold tones, a figure standing small at the field's edge with posture at rest and head slightly raised, the sky above in warm gold fading to deep navy at the far horizon, the bounty of the earth in the foreground, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P30 — Foundation for everything else God is about to do <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, staircase, a wide flat step at the bottom in amber labeled Noahic — The World Preserved with a small rainbow symbol, four narrower steps rising above it in navy labeled Abraham, Moses, David, and New Covenant in ascending order — the bottom step the foundation of all the rest, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 4: THE ABRAHAMIC COVENANT  (P31–P46)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>The Abrahamic Covenant</h2>
+    <span class="section-count">P31–P46</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P31 — God approaches Abram in Ur of the Chaldeans</div>
+    <div class="prompt-text">Abraham standing at the outer edge of a pagan city at night, the city behind him dense with torch-lit structures and idol silhouettes in deep navy, Abraham's posture turned away from the city — not yet fully gone but beginning to move — a shaft of pale amber light opening ahead of him into open darkness, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P32 — Abram: no special qualifications <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: figures of the ancient world in positions of status — a king on a throne, a priest at an altar, a warrior in armor — amber light on all of them, amber banner labeled The World's Candidates. Right panel: Abraham alone in a simple tent setting, unremarkable posture, parchment and cool gray tones, no crown or title, a single amber light on him from above, navy banner labeled The One God Chose, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P33 — Genesis 12:1–3 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Abraham's painterly portrait bust beside the scroll, centered verse text: The Lord had said to Abram, Go from your country, your people and your father's household to the land I will show you. I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing. I will bless those who bless you, and whoever curses you I will curse; and all peoples on earth will be blessed through you. Genesis 12:1–3, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P34 — Three promises: land, descendants, blessing to all <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, three objects spaced evenly: a rolled map on the left labeled A Land, a cluster of stars in the center labeled Descendants, an open hand with light rising upward on the right labeled All Nations Blessed — each resting on an amber brushstroke banner, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P35 — All peoples on earth will be blessed through Abram <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, ring diagram, innermost ring labeled Abram in amber, middle ring labeled Israel in navy, outermost ring labeled All Nations in navy — the blessing flowing outward from the center with no wall stopping it, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P36 — Abram's problem: old age, Sarah is barren</div>
+    <div class="prompt-text">Abraham and Sarah standing together under a night sky, both elderly — shoulders slightly rounded, postures of people who have waited a long time — a small fire beside them casting amber warmth on both figures, the vast dark sky above offering no obvious answer, deep navy surrounding, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P37 — Abram's question: how am I supposed to believe this?</div>
+    <div class="prompt-text">Abraham standing alone in open desert at night, head lifted toward an immense star-filled sky, arms slightly open at his sides in a posture holding both faith and honest doubt, the scale of the sky dwarfing him, amber warmth from a fire behind him, deep navy above dense with stars too numerous to count, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P38 — God says: bring me some animals</div>
+    <div class="prompt-text">Abraham in an open field at dusk preparing the covenant animals — a heifer, a goat, a ram — visible in the amber last light of the sun, Abraham's posture attentive and still, the deep navy sky beginning above the western horizon, the weight of what is about to happen in the scene's quiet, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P39 — The ancient covenant ritual explained <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, three labeled nodes in sequence: first node labeled Animals Cut in Two in navy, arrow to second node labeled Path Laid Between the Halves in navy, arrow to third node labeled Both Parties Walk Through in amber — a consequence note below the path labeled May I Be Cut Like These If I Break My Word — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P40 — The halved animals laid out, the path between them</div>
+    <div class="prompt-text">Halved animal carcasses laid in two rows on bare ground with a narrow path running between them, the path illuminated by amber firelight from below, deep navy darkness pressing in from all sides, no human figure present — the path empty and waiting, the heaviness of the covenant in the stillness, all elements including any hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P41 — May I be cut in half if I break this covenant</div>
+    <div class="prompt-text">The path between the halved animals seen from above, the narrow corridor of light between the rows of carcasses on either side, deep navy wash surrounding, a thin amber light running the full length of the path — the only warmth in the scene — the seriousness of the oath visible in the arrangement, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P42 — Genesis 15:12 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Abraham's painterly portrait bust beside the scroll, centered verse text: As the sun was setting, Abram fell into a deep sleep, and a thick and dreadful darkness came over him. Genesis 15:12, deep navy wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P43 — Genesis 15:17 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Abraham's painterly portrait bust beside the scroll, centered verse text: When the sun had gone down and it was dark, behold, a smoking fire pot and a flaming torch appeared and passed between the pieces. Genesis 15:17, deep navy wash background with amber flame glow at the edges, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P44 — God alone walks between the pieces</div>
+    <div class="prompt-text">A smoking fire pot and a flaming torch moving along the narrow path between the halved animals, amber and gold flame light illuminating the path and the animal halves on both sides, no human figure anywhere — only fire and smoke passing through alone — deep navy surrounding everything, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P45 — God takes upon Himself both sides of the covenant <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, two nodes side by side labeled Side A and Side B in navy, a single amber figure labeled God with arrows reaching from it to both nodes — God alone responsible for both sides — no human figure connected to either side, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P46 — Even if your descendants fail — I will bear the consequences <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a long line of figures — Abraham's descendants — scattered and failing, postures bent and broken across the ground, deep navy wash, navy banner labeled They Will Fail. Right panel: God's presence as a steady amber light bearing down over the same scattered figures from above — the light unchanged despite the people below — amber banner labeled I Will Bear It, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 5: THE MOSAIC COVENANT  (P47–P72)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>The Mosaic Covenant</h2>
+    <span class="section-count">P47–P72</span>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P47 — Four hundred years from promise to slavery <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a horizontal line with Abraham's flame at the left end labeled The Promise and a set of chains at the right end labeled 400 Years Later — Slavery in Egypt, the distance between the two ends labeled Four Hundred Years, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P48 — Israelites enslaved in Egypt</div>
+    <div class="prompt-text">Rows of Israelite workers hauling massive stone blocks beneath enormous Egyptian structures, figures small against the scale of the walls above them, deep navy and cool gray wash over everything, no warmth anywhere except a faint amber glow at the far horizon too distant to reach, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P49 — God raised up Moses</div>
+    <div class="prompt-text">Moses standing alone in a desert landscape before a burning bush blazing in amber and gold, Moses's posture stilled — the call settling on him — his face turned toward the light, deep navy surrounding beyond the bush's light, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block four-panel">
+    <div class="prompt-label">P50 — Ten devastating plagues <span class="type-tag tag-four-panel">four-panel strip</span></div>
+    <div class="prompt-text">Four small panels in a strip: first panel — the Nile thick and darkened, Egyptian figures recoiling at the bank, deep navy and rust wash, navy banner labeled Water; second panel — dense swarms of insects rising from the ground over Egyptian houses, deep navy, navy banner labeled Swarms; third panel — thick darkness covering Egyptian figures while a small pocket of amber warmth remains visible at the far right edge, deep navy, navy banner labeled Darkness; fourth panel — Egyptian figures in mourning postures before empty doorways, deep navy, navy banner labeled Death of Firstborn, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P51 — Through the Red Sea on dry ground</div>
+    <div class="prompt-text">A vast multitude of Israelite figures walking between two towering walls of water, the corridor between the walls dry and amber-lit from below, the water walls in deep navy and steel blue pressing inward from both sides, figures small and numerous against the impossible scale of the water above them, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P52 — Food from heaven in the desert</div>
+    <div class="prompt-text">Israelite figures standing in open desert with hands raised open, small white flakes of manna falling from above against a deep navy morning sky, amber warmth from the east touching the upturned faces, the desert floor beginning to be covered in white flakes below their feet, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P53 — Water from a rock</div>
+    <div class="prompt-text">Moses standing beside a large rock in the desert, water flowing from its base in a clear stream, Israelite figures gathered around it in postures of relief and drinking, amber warmth on the flowing water itself, the surrounding desert in deep navy and gray, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P54 — Pillar of cloud by day and pillar of fire by night <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a great pillar of white cloud rising from the desert path into a blue sky, the Israelite camp small below it in daylight, amber banner labeled By Day. Right panel: the same pillar blazing in amber and gold against a deep navy desert night, the camp encamped below in its light, amber banner labeled By Night, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P55 — Mount Sinai</div>
+    <div class="prompt-text">Mount Sinai rising steeply above a vast open plain, the summit wrapped in thick cloud and amber fire, light radiating downward from the peak toward the base, the Israelite assembly gathered at the base — tiny against the mountain's scale — postures bent in reverence, deep navy sky above and beyond the fire at the summit, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P56 — Exodus 19:5–6 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Moses's painterly portrait bust beside the scroll, centered verse text: Now if you obey me fully and keep my covenant, then out of all nations you will be my treasured possession. Although the whole earth is mine, you will be for me a kingdom of priests and a holy nation. Exodus 19:5–6, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P57 — The word "IF": a conditional covenant <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, one central diamond node labeled IF You Obey in navy, one arrow pointing right labeled Blessing in amber, one arrow pointing left labeled Curse in steel blue — the conditional structure visible — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P58 — Conditional vs. unconditional: this covenant is different <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a sealed scroll with an open hand beside it, no conditions attached, warm amber wash, amber banner labeled Unconditional — Noahic and Abrahamic. Right panel: a stone tablet with the word IF visible pressed into its surface, steel blue and navy wash, navy banner labeled Conditional — Mosaic, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P59 — Deuteronomy 28: blessings for obedience</div>
+    <div class="prompt-text">A flourishing land — gentle rain falling, grain in amber fields, figures at rest in a peaceful setting, warm amber light across rolling hills, a single pocket of cool shadow at the far edge framing the warmth, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P60 — Curses for disobedience: famine, defeat, exile</div>
+    <div class="prompt-text">A barren cracked landscape, figures bent low under the weight of famine and defeat, the sky above heavy in deep navy, no amber warmth anywhere — only a single cold pale light at the center of the landscape, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P61 — Exodus 19:8 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Moses's painterly portrait bust beside the scroll, centered verse text: The people all responded together, We will do everything the Lord has said. Exodus 19:8, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P62 — The people had no idea what they were committing to</div>
+    <div class="prompt-text">The Israelite assembly at the base of Sinai, figures small against the mountain above, arms raised in collective response — a posture of confidence that the scale and fire of the mountain above them subtly contradicts — deep navy sky above the amber fire at the summit, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P63 — Moses receives the law — not just ten commandments</div>
+    <div class="prompt-text">Moses on the summit of Sinai, both arms raised and open, two stone tablets descending toward his hands in a shaft of amber light from above, the fire and cloud of the divine presence surrounding the summit, Moses's figure small against the mountain's scale and the light bearing down, deep navy sky beyond, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P64 — Full obedience required: break one, break all <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, a row of ten small stone tablets numbered 1 through 10 in navy, a single crack visible through one of the middle tablets — the entire row shown as compromised — the label Break One, Break All in amber beneath the row, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block three-panel">
+    <div class="prompt-label">P65 — Israel's arc: commitment, failure, consequence <span class="type-tag tag-three-panel">three-panel</span></div>
+    <div class="prompt-text">Three-panel character study, Israel: left panel a figure at Sinai with posture forward and confident — We will do it — deep navy wash with amber on the figure, navy banner labeled We Will Obey; center panel the same figure turning away from stone tablets toward an idol, posture wavering between two directions, amber on one side and navy on the other, navy banner labeled Already Breaking It; right panel the figure bent and bound in exile posture, deep navy wash, navy banner labeled The Consequence, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P66 — They built idols within weeks of receiving the law</div>
+    <div class="prompt-text">Israelite figures bowing before a golden calf at the base of a mountain, the mountain still burning in amber fire and cloud above them, the worship postures bent toward the calf, amber light on the calf, deep navy sky above, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P67 — Their kings led the nation into corruption</div>
+    <div class="prompt-text">A king on a throne turned toward an idol in a darkened throne room, posture leaning toward the idol in reverence, the throne itself in shadow, deep navy wash throughout, a single cold blue light on the idol — not amber — suggesting the wrong object of worship, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P68 — Every year on the Day of Atonement</div>
+    <div class="prompt-text">The high priest standing alone before the altar inside the tabernacle, arms raised in the posture of offering, wearing white linen robes, amber light from the altar fire falling on him and the altar only, the interior of the tabernacle in deep navy shadow behind him, a single cold gray pocket at the far edge suggesting what waits outside, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P69 — And then do it all over again the next year <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, a circular loop with two nodes: node labeled Sin Remains in navy, arrow pointing to node labeled Day of Atonement in amber, arrow looping back to Sin Remains — the loop repeating — a dotted amber arrow breaking out of the loop pointing upward labeled What Was Still Needed, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P70 — The law was not a mistake — it was a tutor <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, two objects side by side: on the left a stone tablet labeled The Law — Guardian in navy, on the right a radiant figure in outline labeled The Goal — Christ in amber, a directional amber arrow from the tablet pointing toward the figure — the law as a guide toward something greater, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P71 — The X-ray: shows the break, cannot heal it <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a stone tablet with a crack running clearly through its center, cold blue light illuminating the fracture, deep navy wash, navy banner labeled Reveals the Break. Right panel: the same fracture now filled with amber warmth — healed from within — the crack sealed, warm gold wash, amber banner labeled What Was Needed, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P72 — Mosaic revealed the problem, never the solution <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, two nodes: left node labeled Mosaic Covenant — Reveals Sin in navy, a forward arrow labeled Points Beyond Itself leading to the right node labeled The Solution Still Coming in amber, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 6: THE DAVIDIC COVENANT  (P73–P92)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>The Davidic Covenant</h2>
+    <span class="section-count">P73–P92</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P73 — Six hundred years later: Israel at a high point</div>
+    <div class="prompt-text">A view of settled Israel from a slight elevation — villages and fields stretching across the landscape, figures small and at rest, amber light across the rolling land, a pocket of cool shadow at the far horizon reminding the viewer that peace is provisional, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block four-panel">
+    <div class="prompt-label">P74 — David's rise: shepherd, giant-slayer, warrior, king <span class="type-tag tag-four-panel">four-panel strip</span></div>
+    <div class="prompt-text">Four small panels in a strip: first panel — a young David in a field, small flock behind him, amber light, amber banner labeled The Shepherd; second panel — David standing over the fallen Goliath on the battlefield, posture upright, amber light on David alone, deep navy, amber banner labeled The Giant Slain; third panel — David at the head of a victorious army, figures behind him, amber banner labeled The Warrior; fourth panel — David standing at the gates of Jerusalem looking over the captured city, amber evening light, amber banner labeled The King, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P75 — David loved God</div>
+    <div class="prompt-text">David alone in his palace, posture bent forward over a writing surface composing a psalm, amber light falling from above onto him and the surface only, the rest of the room in deep navy shadow, the intimacy of worship in the quietness of the scene, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P76 — David in his cedar palace, feeling the contrast</div>
+    <div class="prompt-text">David standing inside his cedar palace, the rich warm wood walls in amber light, David's posture at ease but head slightly bowed — the comfort sitting uneasily — amber light on the cedar walls, a single cool shadow in the far corner of the room where nothing has been placed, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P77 — David's house vs. God's tent <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: David inside his cedar palace, rich warm wood walls in amber light, David's posture at ease but head bowed in reflection, amber banner labeled My House. Right panel: the ark of the covenant draped in linen fabric inside a simple tent, cool gray light filtering through the tent fabric, the plainness of the space in contrast to the palace, navy banner labeled God's Tent, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P78 — David tells Nathan: I want to build God a house</div>
+    <div class="prompt-text">David and Nathan the prophet standing together in the cedar palace, David's posture leaning slightly forward with purpose — the desire in the angle of his body — Nathan facing him with an attentive posture, amber light on both figures, the cedar walls of the palace warm behind them, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P79 — But that night God came to Nathan with a correction and a promise</div>
+    <div class="prompt-text">Nathan the prophet alone at night, posture attentive and still, a single shaft of amber light descending from above onto Nathan only, deep navy surrounding the rest of the room, the weight of the received word visible in the stillness of his posture, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P80 — 2 Samuel 7:11–16 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, David's painterly portrait bust beside the scroll, centered verse text: The Lord declares to you that the Lord himself will establish a house for you: When your days are over and you rest with your ancestors, I will raise up your offspring to succeed you, your own flesh and blood, and I will establish his kingdom. He is the one who will build a house for my Name, and I will establish the throne of his kingdom forever. I will be his father, and he will be my son. When he does wrong, I will punish him with a rod wielded by men, with floggings inflicted by human hands. But my love will never be taken away from him, as I took it away from Saul, whom I removed from before you. Your house and your kingdom will endure forever before me; your throne will be established forever. 2 Samuel 7:11–16, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P81 — David wanted to build God a house. God said: I will build you a house. <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, two nodes with crossed arrows between them: left node labeled David: I Will Build You a House in navy, right node labeled God: I Will Build You a House in amber — the crossed arrows showing the reversal of direction — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P82 — A descendant on his throne forever <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a horizontal line with David's crown at the left end labeled David's Throne and an eternal amber flame at the right end labeled Forever, the distance between them labeled His Kingdom Will Never End, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P83 — In the short term: Solomon builds the temple</div>
+    <div class="prompt-text">Solomon's temple rising in Jerusalem, white stone and cedar columns, amber morning light falling across the facade, figures of workers small at the base completing the final stones, a shaft of gold light from above landing on the temple's apex, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P84 — The throne passes through David's family for centuries</div>
+    <div class="prompt-text">A succession of figures passing a crown from one to the next in a long line across the composition, the amber light on the first figure gradually cooling toward steel blue as the line progresses — each king mortal, each transfer one step further from the original — soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block four-panel">
+    <div class="prompt-label">P85 — The kings kept dying, kept sinning <span class="type-tag tag-four-panel">four-panel strip</span></div>
+    <div class="prompt-text">Four small panels in a strip: first panel — Solomon on his opulent throne, amber light already fading at the edges into navy, navy banner labeled Solomon Turns Away; second panel — a later king bowing toward an idol in a darkened palace, throne in shadow, deep navy, navy banner labeled Corruption; third panel — Assyrian soldiers at the broken gates of a northern Israelite city, deep navy, navy banner labeled North Falls; fourth panel — the temple of Solomon in flames, smoke rising, figures small and fleeing, deep navy, navy banner labeled Jerusalem Burns, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P86 — The northern kingdom collapsed to the Assyrians</div>
+    <div class="prompt-text">The walls of a northern Israelite city broken and breached, Israelite figures in exile posture walking away from the rubble, deep navy wash over the scene, a single pale amber light behind them — the city they are leaving — the warmth receding as they move forward into darkness, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P87 — The southern kingdom fell to Babylon, the temple burned</div>
+    <div class="prompt-text">The temple of Solomon in flames against a dark sky, the great structure consumed by fire and smoke, figures small and fleeing at the base, deep navy everywhere except the amber and orange of the fire, a single cold blue light above the smoke — not warm, not hopeful — soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P88 — No king on the throne of David — the dynasty gone silent</div>
+    <div class="prompt-text">The throne room of Jerusalem empty and still, the throne cracked and cold at the center, broken columns and fallen stone around it, no figure present, deep navy wash throughout, a single cold shaft of blue-gray light falling through a gap in the broken wall onto the empty throne — the silence of an unanswered promise, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P89 — What happened to the promise that the throne would last forever?</div>
+    <div class="prompt-text">Sean in a modern setting, posture leaning slightly forward in thought, a faint illustration of an empty throne in deep navy visible in the background behind him, amber light on Sean, the question in the angle of his posture, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P90 — Luke 1:32–33 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Gabriel's painterly portrait bust beside the scroll, centered verse text: He will be great and will be called the Son of the Most High. The Lord God will give him the throne of his father David, and he will reign over the house of Jacob forever; his kingdom will never end. Luke 1:32–33, warm amber wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P91 — Shadow throne vs. eternal throne <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: a stone throne in Jerusalem's walled throne room, a mortal king seated, amber light present but enclosed by mortal walls, the throne solid yet temporary, navy banner labeled The Shadow. Right panel: a throne of pure light, no earthly walls or ceiling — white center glow radiating outward fading to soft gold and deep navy at the edges — no limit, no end, amber banner labeled Forever, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P92 — The Davidic Covenant was not about Solomon. It was always about Jesus.</div>
+    <div class="prompt-text">David standing at sunset looking toward a horizon where a single bright point of amber light burns in the far distance, David's posture facing that light — the Jerusalem cityscape behind him in cool navy shadow — pointing beyond what he could see toward something greater, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 7: THE NEW COVENANT  (P93–P114)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>The New Covenant</h2>
+    <span class="section-count">P93–P114</span>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P93 — By Jeremiah's time, Israel had been faithless for generations</div>
+    <div class="prompt-text">The interior of the Jerusalem temple, signs of corruption visible — incense altars turned toward foreign objects, the presence of idols in shadow, deep navy throughout, a single amber lamp still burning in one corner barely holding against the darkness, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P94 — Babylon was at the gates</div>
+    <div class="prompt-text">Jerusalem's outer wall seen from the city side, figures on the ramparts small and watching, the distant horizon beyond the wall in deep navy with the smoke and structures of the Babylonian advance, a single amber light from inside the city casting a faint glow on the back of the wall — the last warmth before the siege closes, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P95 — Jeremiah — the weeping prophet — watching his world collapse</div>
+    <div class="prompt-text">Jeremiah standing alone at the top of Jerusalem's city wall, back to the viewer, facing the dark horizon where smoke suggests the Babylonian advance, deep navy wash over everything beyond the wall, a single torch behind Jeremiah casting amber light on his back and a long shadow forward across the wall, the weight visible in his bowed shoulders, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P96 — In that darkest hour, God gave the most extraordinary promise</div>
+    <div class="prompt-text">Jeremiah in the rubble of a collapsed section of the city, posture bent under the weight of grief, a single shaft of amber light descending from above and landing on him alone amid the ruins, deep navy surrounding everything, the contrast between the darkness and the light sharp and unexpected, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P97 — Jeremiah 31:31–33 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Jeremiah's painterly portrait bust beside the scroll, centered verse text: The days are coming, declares the Lord, when I will make a new covenant with the house of Israel and with the house of Judah. It will not be like the covenant I made with their ancestors when I took them by the hand to lead them out of Egypt, because they broke my covenant, though I was a husband to them, declares the Lord. This is the covenant I will make with the house of Israel after that time, declares the Lord. I will put my law in their minds and write it on their hearts. I will be their God, and they will be my people. Jeremiah 31:31–33, warm parchment wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P98 — The problem was not the old covenant — it was the people <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, two nodes: left node labeled The Old Covenant — Good in amber, arrow pointing right to node labeled The People — They Broke It in navy, a second arrow from the people node pointing downward labeled The Real Problem Located Here — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P99 — They broke it in the desert at Sinai</div>
+    <div class="prompt-text">Israelite figures bowing before the golden calf at the base of a mountain, the mountain still burning in amber fire and cloud visible above them, the worship postures bent toward the calf and away from the mountain, the betrayal in the direction the figures face, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P100 — They broke it in the days of the judges</div>
+    <div class="prompt-text">A settlement in the era of the judges — figures turning away from an unlit altar toward the warmth of foreign idols, postures bent toward the wrong worship objects, the altar of God cold and unused at the left edge, deep navy throughout with amber light only at the idols on the right, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P101 — Required obedience but could not produce obedience <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, two nodes: left node labeled Mosaic Covenant — Requires Obedience in navy, arrow pointing right to node labeled Human Heart — Cannot Produce It in steel blue, the gap between requirement and capacity labeled The Problem, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P102 — The heart of the problem is the human heart</div>
+    <div class="prompt-text">A stone heart resting on open ground, cold and still, deep navy surrounding, a single amber light above it that the stone surface cannot absorb — the hardness unable to receive the warmth — the image simple and direct, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P103 — The law written on tablets of stone: cold and external</div>
+    <div class="prompt-text">Two stone tablets standing upright in open space, chiseled laws on their surface, no figure present, deep navy and steel blue wash, the cold permanence of the stone in the scene's stillness, a distant pocket of amber at the far right edge suggesting what is still missing, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P104 — Law written on tablets of stone vs. law written on the heart <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: cold stone tablets standing upright, no figure, deep navy and steel blue wash, navy banner labeled Written in Stone. Right panel: a single figure standing with arms slightly open, amber light radiating from within the chest outward — the law inside rather than outside — warm gold wash, amber banner labeled Written on the Heart, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P105 — I will forgive their wickedness and remember their sins no more</div>
+    <div class="prompt-text">A figure standing in open amber light, posture completely upright and unburdened, the weight entirely gone from the shoulders, warm gold wash surrounding the figure, a single deep navy shadow behind — what was forgiven — the light in front fully covering, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P106 — Day of Atonement: covered for now, but not removed <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: the high priest at the altar on the Day of Atonement, arms raised, amber fire light on the altar and the priest, navy banner labeled Covered for Now. Right panel: the same high priest returning the following year to the same altar — the same posture, the same altar, the cycle repeating — navy wash, navy banner labeled But Not Removed, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P107 — Hebrews 10:4 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, a first-century scholar's painterly portrait bust beside the scroll, centered verse text: It is impossible for the blood of bulls and goats to take away sins. Hebrews 10:4, cool gray wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P108 — A substitute only works if of sufficient worth <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, three objects in ascending scale: a small animal on the left labeled Not Enough, a human figure in the center labeled Still Not Enough, a radiant figure on the right labeled Sufficient Worth — each on an amber brushstroke banner, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P109 — What was needed: sinless, of infinite worth</div>
+    <div class="prompt-text">A solitary figure standing in open light, posture completely unbowed — no weight of sin — white center glow radiating from the figure outward, deep navy at the very edges, the quality of the light around the figure different from every other figure in the series, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P110 — Luke 22:20 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Jesus's painterly portrait bust beside the scroll, centered verse text: This cup is the new covenant in my blood, which is poured out for you. Luke 22:20, deep navy wash background with amber candlelight glow at the edges, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P111 — Jesus at the Passover table, inaugurating the New Covenant</div>
+    <div class="prompt-text">Jesus seated at the Passover table, a cup raised in both hands, amber candlelight from the table falling on Jesus and the cup, the disciples visible as figures in the background in deep navy shadow, the weight of the moment in the complete stillness of the scene, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P112 — He was the one who walked between the pieces</div>
+    <div class="prompt-text">Jesus walking the narrow path between two rows of darkness — the ancient covenant corridor — amber light falling on him from above, the weight of both sides pressing in from the deep navy surrounding, Jesus's posture bearing the full burden forward, jaw set, moving through, all elements including hands drawn in watercolor painterly style, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P113 — Because of His resurrection, His sacrifice was finished — He sat down</div>
+    <div class="prompt-text">Jesus seated in complete rest, posture fully at ease — the weight entirely gone from the shoulders, palms open and resting on the knees, white center glow radiating outward from the figure fading to soft gold, deep navy at the very edges — the stillness of finished work, no striving left in the posture, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P114 — The New Covenant delivers on all five <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, staircase, five rising steps left to right: bottom step labeled Noahic — World Preserved with a rainbow, second step labeled Abrahamic — Blessing Promised with a flame, third step labeled Mosaic — Problem Revealed with stone tablets, fourth step labeled Davidic — King Forever with a crown, top step labeled New Covenant — All Delivered with a cross — top step in amber, all others in navy, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 8: WHY IT MATTERS TODAY  (P115–P140)
+  ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>Why It Matters Today</h2>
+    <span class="section-count">P115–P140</span>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P115 — Every covenant: God always moving toward His people <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a horizontal line with five covenant markers, each labeled with God's action: God Preserved, God Called, God Descended, God Promised, God Came — all five arrows pointing inward from the line toward a central figure labeled Humanity — navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P116 — Sean teaching: this is not just interesting history</div>
+    <div class="prompt-text">Sean standing in a modern setting, posture open toward the viewer, one hand raised slightly, amber light on him from the side, a cool shadow behind, the urgency of the teaching moment in the angle of his posture, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P117 — In every covenant, God is the one who initiates <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, five equally spaced arrows all pointing inward from different directions toward a central figure labeled Humanity, each arrow labeled: From the Flood, From Paganism, From Egypt, From the Palace, From Heaven — navy arrows and amber labels, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block four-panel">
+    <div class="prompt-label">P118 — God found Noah, called Abraham, came at Sinai, went to David <span class="type-tag tag-four-panel">four-panel strip</span></div>
+    <div class="prompt-text">Four small panels in a strip: first panel — a shaft of amber light descending onto Noah alone in a dark landscape, amber on Noah only, deep navy surrounding, amber banner labeled God Found Noah; second panel — Abraham turning from his city toward open amber light ahead, amber banner labeled God Called Abraham; third panel — fire descending on the peak of Sinai, the people gathered small at the base, amber banner labeled God Came Down; fourth panel — Nathan the prophet receiving the word at night, a single amber shaft on Nathan only, deep navy, amber banner labeled God Went to David, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P119 — God sent His Son while the people were still sinners</div>
+    <div class="prompt-text">A doorway of amber light breaking open in a deep navy world, the figure of Jesus in ancient dress stepping through the doorway into the darkness, the light behind him — not ahead — he is entering the darkness to bring the light into it, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block scripture">
+    <div class="prompt-label">P120 — Romans 5:8 <span class="type-tag tag-scripture">scripture card</span></div>
+    <div class="prompt-text">Scripture card, ancient unfurled parchment scroll with rolled ends, aged cream surface, Paul's painterly portrait bust beside the scroll, centered verse text: But God demonstrates his own love for us in this: while we were still sinners, Christ died for us. Romans 5:8, warm amber wash background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P121 — The covenants: a window into the character of God</div>
+    <div class="prompt-text">Sean seated and leaning slightly forward, posture open and still, amber light on him from the side, a deep navy background behind, the posture of someone who has just understood something important — not excited, but changed, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P122 — A God who does not wait for people to get their act together</div>
+    <div class="prompt-text">Figures in broken postures scattered across a dark landscape, none of them upright, none of them reaching — and yet a great amber light descending from above toward them anyway, the light not waiting for them to stand up, deep navy surrounding, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P123 — When humanity broke the covenant in the Garden, He made a new one</div>
+    <div class="prompt-text">Adam and Eve walking away from the Garden gate into deep navy, postures bent, and a thread of amber light from behind following them out — not abandoning, not turning away — a new warmth visible in the darkness they are entering, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P124 — When they broke that one, He made another. And another. <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, flowchart, a repeating pattern of three cycles: each cycle has a node labeled Covenant Made in amber, arrow to node labeled Covenant Broken in navy, arrow looping back to a new node labeled New Covenant Made in amber — three full cycles shown — ending with an upward amber arrow labeled Until the Final One, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P125 — Until He did the one thing that could not be undone</div>
+    <div class="prompt-text">A dark world at night, a single amber light beginning to break at the horizon — not the sun, something different — the darkness total except for this one growing point of warmth, figures on the earth below not yet seeing it, the moment before everything changed, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P126 — He put on human skin</div>
+    <div class="prompt-text">Jesus as a newborn infant wrapped in simple cloth, lying in a manger of rough wood, amber light from a single nearby lamp falling on the child, the crude stable surroundings in deep navy, the smallness of the scene against the immensity of what it means, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P127 — Lived the life we should have lived</div>
+    <div class="prompt-text">Jesus in ancient dress walking among people in a village setting, figures around him reaching toward him and being met, amber light on Jesus only — the warmth centered on him — the surrounding figures in cooler parchment and cream tones, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P128 — Died the death we should have died</div>
+    <div class="prompt-text">A solitary cross against a darkened sky, no figures, the cross standing in complete stillness, deep navy wash over the entire scene, a single amber light at the very edge of the horizon — not yet gone — the last warmth at the border of the darkness, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P129 — Rose again</div>
+    <div class="prompt-text">An empty tomb at dawn, the stone rolled away from the entrance, pale amber light beginning to fill the opening from within, the surrounding landscape in deep navy giving way to parchment and cream as the light grows outward, no figure — only the open tomb and the expanding light, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P130 — A permanent, unbreakable relationship sealed by His own blood <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, object row, three objects: a small animal on the left labeled Temporary Cover, a human figure of Jesus in the center labeled Permanent Removal, a sealed scroll on the right labeled Unbreakable — each on an amber brushstroke banner, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P131 — If you are a Christian, you are in the New Covenant right now</div>
+    <div class="prompt-text">Sean standing in a modern setting, posture open and at rest, amber light on him from above, a pocket of cool shadow behind, the lightness of someone who knows they are held by something that will not let go, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P132 — The same Spirit that raised Jesus lives inside you <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, ring diagram, innermost ring labeled The Spirit in amber glow, middle ring labeled The Believer in navy, outermost ring labeled The World in deep navy — the Spirit at the innermost center, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P133 — The law being written on your heart, progressively, every day</div>
+    <div class="prompt-text">A figure kneeling in prayer, posture bowed not under burden but in receptivity, amber light descending from above and settling on the figure's chest — the transformation coming from the inside — deep navy surrounding, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P134 — You are the fulfillment of what Jeremiah saw in the rubble <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: Jeremiah in the ruins of Jerusalem, posture bent under grief, deep navy wash, navy banner labeled The Promise in the Dark. Right panel: a believer standing in amber light, posture open and unbowed — the fulfillment arrived — warm gold wash, amber banner labeled The Promise Kept, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block two-panel">
+    <div class="prompt-label">P135 — You are part of the eternal kingdom that David's throne was only a shadow of <span class="type-tag tag-two-panel">two-panel</span></div>
+    <div class="prompt-text">Left panel: David's earthly throne in deep navy, mortal and enclosed, navy banner labeled The Shadow. Right panel: a figure standing in a vast kingdom of light — amber radiating in every direction with no wall or ceiling — amber banner labeled The Reality You Stand In, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P136 — This story is also about you — for those not yet following Jesus</div>
+    <div class="prompt-text">Sean in a modern setting, posture open toward the viewer, one hand slightly extended in invitation, amber light on him, the surrounding scene warm and open — not threatening — the gesture of someone offering something rather than asking for something, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P137 — The New Covenant is not limited to one nation <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, ring diagram, innermost ring labeled Israel in amber, expanding rings in navy labeled Nation, Nation, Nation — the outermost ring labeled Every People and Language — the rings expanding outward with no wall stopping them, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P138 — The blessing promised to Abraham is available to you through faith in Jesus</div>
+    <div class="prompt-text">A vast crowd of figures from many nations gathered on an open plain, all facing the same horizon of amber and gold light, figures small against the vastness ahead, warm parchment and amber tones throughout, a single cool shadow at the very edges framing the warmth at the center, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block concept">
+    <div class="prompt-label">P139 — One long, patient, unstoppable love story <span class="type-tag tag-concept">concept diagram</span></div>
+    <div class="prompt-text">Concept diagram, timeline, a single gold thread running from a broken dark world on the left through five labeled covenant markers — Noah, Abraham, Moses, David, Cross — to a radiant horizon on the right labeled Every Tribe and Tongue — the thread unbroken throughout every marker, navy and amber watercolor palette, white background, soft watercolor illustration, painterly biblical style.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <div class="prompt-block single">
+    <div class="prompt-label">P140 — A people from every tribe and tongue who would know Him</div>
+    <div class="prompt-text">A wide gathering of figures from many nations standing together, their backs to the viewer, all facing a great horizon of amber and gold light, the figures small against the vastness ahead, the light growing strongest at the center of the horizon, warm parchment and amber tones with a single pocket of cool shadow at the far edges — the whole earth in the picture, not because of what they achieved, but because of what He promised and kept, soft watercolor illustration, painterly biblical style. No text.</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+</main>
+
+<script>
+  // Individual copy buttons — copies prompt text only, never the label
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var text = btn.closest('.prompt-block').querySelector('.prompt-text').textContent.trim();
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      }).catch(function() {
+        // fallback for older browsers
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+
+  // Copy All — joins all prompt texts with double newline, labels never included
+  document.getElementById('copy-all').addEventListener('click', function() {
+    var allPrompts = Array.from(document.querySelectorAll('.prompt-text'))
+      .map(function(el) { return el.textContent.trim(); })
+      .join('\n\n');
+    var btn = document.getElementById('copy-all');
+    navigator.clipboard.writeText(allPrompts).then(function() {
+      btn.textContent = 'All Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy All Prompts';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = allPrompts;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'All Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy All Prompts';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+</script>
+
+</body>
+</html>
