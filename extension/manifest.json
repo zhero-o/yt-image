@@ -1,0 +1,65 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "author": {
+    "email": "kylenguyenaws@gmail.com"
+  },
+  "name": "VEO Automation - Auto VEO & Nano Banana on Google Flow",
+  "description": "Auto VEO & Nano Banana your prompts at scale. Batch generate and auto-download videos and images on Google Flow.",
+  "version": "2.9.8.0",
+  "version_name": "2.9.8",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "VEO Automation - Auto VEO & Nano Banana on Google Flow"
+  },
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/index.ts-aXMs3GqP.js"
+      ],
+      "all_frames": false,
+      "matches": [
+        "*://labs.google/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "side_panel": {
+    "default_path": "src/ui/side-panel/index.html"
+  },
+  "offline_enabled": true,
+  "host_permissions": [
+    "*://labs.google/*"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "background",
+    "sidePanel",
+    "activeTab",
+    "downloads",
+    "debugger",
+    "cookies"
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "*://labs.google/*"
+      ],
+      "resources": [
+        "assets/index.ts-aXMs3GqP.js"
+      ],
+      "use_dynamic_url": false
+    }
+  ],
+  "icons": {
+    "16": "src/assets/logo.png",
+    "24": "src/assets/logo.png",
+    "32": "src/assets/logo.png",
+    "128": "src/assets/logo.png"
+  }
+}
