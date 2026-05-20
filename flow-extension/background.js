@@ -39,7 +39,10 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
   const isImage = /\.(jpg|jpeg|png|gif|webp|bmp|svg|jfif)$/i.test(item.filename || item.url);
   if (!isVideo && !isImage) return;
 
-  if (!autoRename) return;
+  if (!autoRename) {
+    suggest({ filename: (item.filename || '').split('/').pop() || item.filename });
+    return;
+  }
 
   if (downloadRenames.has(item.url)) {
     suggest({ filename: downloadRenames.get(item.url) });
@@ -93,11 +96,11 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
       return true;
     }
 
-    // Dispatch a key event
+    // Dispatch a key event (modifiers bitmask: Ctrl=2, Shift=8, Alt=1, Meta=4)
     case 'CK': {
       if (!tabId) { reply({ success: false, error: 'No tab' }); break; }
-      const { key, keyCode, code } = msg;
-      const base = { key, code, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode };
+      const { key, keyCode, code, modifiers = 0 } = msg;
+      const base = { key, code, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode, modifiers };
       sendDebugCommand(tabId, 'Input.dispatchKeyEvent', { type: 'keyDown', ...base })
         .then(() => sendDebugCommand(tabId, 'Input.dispatchKeyEvent', { type: 'keyUp', ...base }))
         .then(() => reply({ success: true }))

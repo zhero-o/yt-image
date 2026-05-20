@@ -172,13 +172,16 @@ btnStart.addEventListener('click', async () => {
     folder: folderInput.value.trim(),
     prefix: prefixInput.value.trim(),
     delayBetween: delay,
-  }, (res) => {
+  }, () => {
+    // This fires when the entire batch is done (content script calls reply).
+    // Only reset UI if notifyStatus hasn't already done it (badge still 'running').
     if (chrome.runtime.lastError) {
       setBadge('error');
       alert('Could not reach content script. Make sure you are on a Google Flow page and reload the tab.');
+      btnStart.disabled = false;
+      btnStop.disabled = true;
     }
-    btnStart.disabled = false;
-    btnStop.disabled = true;
+    // If completed/cancelled, notifyStatus already reset the buttons — don't double-reset.
   });
 });
 

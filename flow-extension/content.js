@@ -61,38 +61,28 @@ function getRect(el) {
 
 // ── Core automation ───────────────────────────────────────────────────────────
 
-async function clearPrompt() {
-  const editor = document.querySelector(SEL.promptEditor);
-  if (!editor) return;
-  editor.focus();
-  await send({ type: 'CK', key: 'a', code: 'KeyA', keyCode: 65 }); // Ctrl+A via select all
-  // Select all via execCommand
-  document.execCommand('selectAll');
-  await send({ type: 'CK', key: 'Backspace', code: 'Backspace', keyCode: 8 });
-  await sleep(100);
-}
-
 async function fillPrompt(text) {
   const editor = document.querySelector(SEL.promptEditor);
   if (!editor) throw new Error("Could not find prompt editor (div[role='textbox'])");
 
   editor.focus();
+  await sleep(200);
+
+  // Select all with Ctrl+A (modifiers=2 means Ctrl)
+  await send({ type: 'CK', key: 'a', code: 'KeyA', keyCode: 65, modifiers: 2 });
+  await sleep(80);
+  // Delete selection
+  await send({ type: 'CK', key: 'Backspace', code: 'Backspace', keyCode: 8 });
   await sleep(150);
 
-  // Clear existing content
-  document.execCommand('selectAll');
-  await sleep(50);
-  await send({ type: 'CK', key: 'Backspace', code: 'Backspace', keyCode: 8 });
-  await sleep(100);
-
-  // Insert new text via debugger
+  // Insert new text via debugger Input.insertText
   const result = await send({ type: 'CIT', text });
   if (!result?.success) throw new Error('Failed to fill prompt: ' + (result?.error || 'unknown'));
 
-  // Trigger React/Angular input detection
-  editor.dispatchEvent(new Event('input', { bubbles: true }));
+  // Fire synthetic events so React/Angular picks up the value change
+  editor.dispatchEvent(new InputEvent('input', { bubbles: true, data: text }));
   editor.dispatchEvent(new Event('change', { bubbles: true }));
-  await sleep(200);
+  await sleep(300);
 }
 
 async function clickSubmit() {
@@ -117,70 +107,81 @@ async function clickSubmit() {
   await sleep(300);
 }
 
+function countTiles() {
+  return document.querySelectorAll('[data-tile-id]').length;
+}
+
 async function waitForGeneration() {
-  // Wait a moment for the generation to kick off
-  await sleep(2000);
+  const tilesBefore = countTiles();
 
-  // Wait for a loading/generating indicator to appear, then disappear
+  // Give the UI a moment to react to the submit click
+  await sleep(3000);
+
+  // Strategy 1: watch for a new tile to appear (most reliable)
+  const tileAppeared = await new Promise((resolve) => {
+    if (countTiles() > tilesBefore) { resolve(true); return; }
+    const obs = new MutationObserver(() => {
+      if (countTiles() > tilesBefore) { obs.disconnect(); resolve(true); }
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    // Give up waiting for a new tile after 3 minutes
+    setTimeout(() => { obs.disconnect(); resolve(false); }, 180000);
+  });
+
+  if (tileAppeared) {
+    // New tile appeared — wait for loading indicators on it to clear
+    const indicatorSelectors = SEL.generatingIndicator.split(',').map(s => s.trim());
+    for (const sel of indicatorSelectors) {
+      try { await waitForGone(sel, 180000); } catch (_) {}
+    }
+    await sleep(1500);
+    return;
+  }
+
+  // Strategy 2: watch for page-level loading indicator disappearing
   const indicatorSelectors = SEL.generatingIndicator.split(',').map(s => s.trim());
-
   let indicatorFound = false;
   for (const sel of indicatorSelectors) {
     if (document.querySelector(sel)) { indicatorFound = true; break; }
   }
 
-  if (!indicatorFound) {
-    // If no indicator found yet, wait a bit and check again
-    await sleep(3000);
-    for (const sel of indicatorSelectors) {
-      if (document.querySelector(sel)) { indicatorFound = true; break; }
-    }
-  }
-
   if (indicatorFound) {
-    // Wait for all indicators to disappear
     for (const sel of indicatorSelectors) {
       try { await waitForGone(sel, 180000); } catch (_) {}
     }
   } else {
-    // No clear indicator — wait a fixed time and hope generation completes
-    await sleep(30000);
+    // Fallback: fixed wait — video generation can take up to ~90 seconds
+    await sleep(90000);
   }
 
   await sleep(1500);
 }
 
 async function downloadOutputs(folder, prefix, promptIndex) {
+  // Collect all download buttons — from data-tile-id containers first, then fallback
+  const dlSelectors = "button[aria-label*='Download'], a[download], button[jsaction*='download']";
   const tiles = document.querySelectorAll('[data-tile-id]');
-  if (tiles.length === 0) {
-    // Try generic output containers
-    const outputs = document.querySelectorAll(SEL.outputGrid);
-    for (const output of outputs) {
-      const dlBtn = output.querySelector(SEL.downloadButton.split(',')[0]);
-      if (dlBtn) dlBtn.click();
-    }
-    return 0;
+
+  let btns = [];
+  if (tiles.length > 0) {
+    tiles.forEach(tile => {
+      const btn = tile.querySelector(dlSelectors);
+      if (btn) btns.push(btn);
+    });
   }
 
-  let count = 0;
-  for (const tile of tiles) {
-    if (cancelled) break;
-    const dlBtn = tile.querySelector(
-      "button[aria-label*='Download'], a[download], button[jsaction*='download']"
-    );
-    if (!dlBtn) continue;
+  if (btns.length === 0) {
+    // Fallback: any matching download button on the page
+    btns = Array.from(document.querySelectorAll(dlSelectors));
+  }
 
-    const { x, y } = getRect(dlBtn);
-    const filename = `${prefix}prompt-${promptIndex + 1}-output-${count + 1}`;
-    await send({
-      type: 'DOWNLOAD_VIDEO',
-      url: window.location.href,
-      filename,
-      folder,
-      autoChangeFileName: true,
-    });
+  // Click each button — background.js onDeterminingFilename applies folder/prefix
+  let count = 0;
+  for (const btn of btns) {
+    if (cancelled) break;
+    const { x, y } = getRect(btn);
     await send({ type: 'CC', x, y });
-    await sleep(500);
+    await sleep(600);
     count++;
   }
   return count;
