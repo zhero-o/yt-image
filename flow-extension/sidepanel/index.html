@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flow Automation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Flow Automation</h1>
+      <span id="status-badge" class="badge idle">Idle</span>
+    </header>
+
+    <!-- Prompts -->
+    <section class="card">
+      <label class="section-label">Prompts <span class="hint">one per line</span></label>
+      <textarea id="prompts-input" placeholder="A sunset over the ocean&#10;A forest in autumn&#10;A city at night"></textarea>
+      <div class="row">
+        <span id="prompt-count" class="hint">0 prompts</span>
+        <button id="btn-clear-prompts" class="btn-ghost">Clear</button>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="card">
+      <label class="section-label">Settings</label>
+      <div class="field">
+        <label for="folder-input">Download folder</label>
+        <input id="folder-input" type="text" placeholder="e.g. flow-outputs" />
+      </div>
+      <div class="field">
+        <label for="prefix-input">File prefix</label>
+        <input id="prefix-input" type="text" placeholder="e.g. batch1-" />
+      </div>
+      <div class="field">
+        <label for="delay-input">Delay between prompts (sec)</label>
+        <input id="delay-input" type="number" value="3" min="1" max="60" />
+      </div>
+      <div class="field row">
+        <label for="auto-rename">Auto-rename downloads</label>
+        <input id="auto-rename" type="checkbox" checked />
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="btn-start" class="btn-primary">▶ Start</button>
+      <button id="btn-stop" class="btn-danger" disabled>■ Stop</button>
+    </div>
+
+    <!-- Progress -->
+    <section class="card" id="progress-section" style="display:none">
+      <label class="section-label">Progress</label>
+      <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+      <ul id="progress-list"></ul>
+    </section>
+
+    <!-- Advanced -->
+    <details class="card">
+      <summary class="section-label">Advanced — Selectors</summary>
+      <p class="hint" style="margin-bottom:8px">Update these if Google Flow changes its UI structure.</p>
+      <div class="field">
+        <label>Prompt editor</label>
+        <input class="sel-input" data-key="promptEditor" type="text" />
+      </div>
+      <div class="field">
+        <label>Submit button</label>
+        <input class="sel-input" data-key="submitButton" type="text" />
+      </div>
+      <div class="field">
+        <label>Generating indicator</label>
+        <input class="sel-input" data-key="generatingIndicator" type="text" />
+      </div>
+      <div class="field">
+        <label>Output grid item</label>
+        <input class="sel-input" data-key="outputGrid" type="text" />
+      </div>
+      <div class="field">
+        <label>Download button</label>
+        <input class="sel-input" data-key="downloadButton" type="text" />
+      </div>
+      <button id="btn-save-selectors" class="btn-ghost" style="margin-top:8px">Save selectors</button>
+    </details>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

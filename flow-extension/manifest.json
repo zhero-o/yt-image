@@ -1,0 +1,41 @@
+{
+  "name": "Flow Automation",
+  "description": "Batch generate and auto-download videos and images on Google Flow.",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Flow Automation"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "all_frames": false,
+      "matches": ["*://labs.google/*"],
+      "run_at": "document_end"
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "offline_enabled": true,
+  "host_permissions": ["*://labs.google/*"],
+  "permissions": [
+    "storage",
+    "tabs",
+    "background",
+    "sidePanel",
+    "activeTab",
+    "downloads",
+    "debugger",
+    "cookies"
+  ],
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  }
+}
